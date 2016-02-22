@@ -1,0 +1,13 @@
+<head>
+  <title>Java knowledge classifier</title>
+</head>
+
+<body>
+  {{> labels}}
+</body>
+
+<template name="labels">
+  {{#each labels}}
+    <span class="label" style="background-color: {{colour}}">{{name}}</span>
+  {{/each}}
+</template>

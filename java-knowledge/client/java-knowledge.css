@@ -1,0 +1,11 @@
+/* CSS declarations go here */
+body {
+    background-color: black;
+}
+
+.label {
+  font-family: 'Helvetica Neue';
+  padding: 3px;
+  border-radius: 6px;
+  box-shadow: 1px 1px 3px 0px white;
+}
