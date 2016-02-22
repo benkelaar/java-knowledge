@@ -1,13 +1,50 @@
 <head>
   <title>Java knowledge classifier</title>
 </head>
-
 <body>
-  {{> labels}}
+  <header>
+      {{> loginButtons}}
+  </header>
+  {{#if currentUser}}
+    {{> labels}}
+    {{> skills}}
+  {{/if}}
 </body>
 
 <template name="labels">
+  Labels:
   {{#each labels}}
     <span class="label" style="background-color: {{colour}}">{{name}}</span>
   {{/each}}
+  <br />
+</template>
+
+<template name="skills">
+  <table id="skills">
+    <thead>
+      <th>I know</th>
+      <th>what it is</th>
+      <th>how to use it</th>
+      <th>when to use it</th>
+      <th>Labels</th>
+    </thead>
+    <tfoot>
+      <tr>
+        <td><input id="newSkill" type="textbox" /></td>
+        <td><img id="addSkill" src="/images/button_add.png" /></td>
+      </tr>
+      <tr>
+        <td>Total score:</td>
+        <td colspan=4>{{score}}</td>
+      </tr>
+    </tfoot>
+    <tbody>
+      {{#each skills}}
+        <td>{{name}}</td>
+        <td>{{#if what}}<input type="checkbox" checked/>{{else}}<input type="checkbox" />{{/if}} /></td>
+        <td>{{#if how}}<input type="checkbox" checked/>{{else}}<input type="checkbox" />{{/if}} /></td>
+        <td>{{#if when}}<input type="checkbox" checked/>{{else}}<input type="checkbox" />{{/if}} /></td>
+      {{/each}}
+    </tbody>
+  </table>
 </template>

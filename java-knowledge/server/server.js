@@ -1,20 +1,18 @@
 Meteor.startup(function () {
-  console.log('here it is\n')
-  var labels = Labels.find({});
-  console.log('labels' + labels.count() + '\n')
-  labels.forEach(function (label) {
-    console.log(label.name);
+  console.log('Started up knowledge tracking server');
+});
+
+Accounts.onCreateUser(function (options, user) {
+  var allSkills = Skills.find({userId: {$exists: false}});
+  console.log('Initializing skills for new user \'' + user.emails[0].address +'\'');
+
+  allSkills.forEach(function (skill) {
+    skill.userId = user._id;
+    Skills.insert(skill);
   });
+  // We still want the default hook's 'profile' behavior.
+  if (options.profile)
+    user.profile = options.profile;
 
-  if (Labels.find({}).count() > 1) {
-    Labels.remove({});
-  }
-
-  if (Labels.find({}).count() < 1) {
-    Labels.insert({
-      id:     "java8",
-      name:   "Java 8",
-      colour: "#f1e05a"
-    });
-  }
+  return user;
 });

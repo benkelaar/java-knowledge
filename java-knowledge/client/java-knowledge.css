@@ -1,11 +1,29 @@
 /* CSS declarations go here */
 body {
     background-color: black;
+    font-family: helvetica;
+    color: white;
+}
+
+table thead th {
+  padding: 10px;
 }
 
 .label {
   font-family: 'Helvetica Neue';
+  color: black;
   padding: 3px;
   border-radius: 6px;
   box-shadow: 1px 1px 3px 0px white;
+}
+
+#login-buttons {
+  right: 110px;
+  position: absolute;
+}
+
+#addSkill {
+  margin-bottom: -5px;
+  height: 18px;
+  cursor: pointer;
 }
