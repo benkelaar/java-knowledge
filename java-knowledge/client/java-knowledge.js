@@ -9,10 +9,11 @@ function initializeDragula() {
     return !isLabelList(el, interactee);
   }
 
-  dragula($('#' + labelListId + ', td.skillLabels').toArray(), {
+  dragula($('#' + labelListId + ', td[data-skill]').toArray(), {
     copy: isLabelList,
     accepts: isNotLabelList
   }).on('drop', function (el, target) {
+    if (!target) return;
     var skill  = target.dataset.skill,
         labels = $(target).children().map(function (i, e) {
       return $(e).text();
