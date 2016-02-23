@@ -8,6 +8,7 @@ Accounts.onCreateUser(function (options, user) {
 
   allSkills.forEach(function (skill) {
     skill.userId = user._id;
+    delete skill._id;
     Skills.insert(skill);
   });
   // We still want the default hook's 'profile' behavior.

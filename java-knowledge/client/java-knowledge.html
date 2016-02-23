@@ -40,10 +40,12 @@
     </tfoot>
     <tbody>
       {{#each skills}}
-        <td>{{name}}</td>
-        <td>{{#if what}}<input type="checkbox" checked/>{{else}}<input type="checkbox" />{{/if}} /></td>
-        <td>{{#if how}}<input type="checkbox" checked/>{{else}}<input type="checkbox" />{{/if}} /></td>
-        <td>{{#if when}}<input type="checkbox" checked/>{{else}}<input type="checkbox" />{{/if}} /></td>
+        <tr>
+          <td>{{name}}</td>
+          <td><input name="{{name}}" data-question="what" type="checkbox" checked="{{what}}" /></td>
+          <td><input name="{{name}}" data-question="how"  type="checkbox" checked="{{how}}"  /></td>
+          <td><input name="{{name}}" data-question="when" type="checkbox" checked="{{when}}" /></td>
+        </tr>
       {{/each}}
     </tbody>
   </table>
