@@ -14,7 +14,7 @@ Skills.addNew = function (name) {
     return;
   }
 
-  console.log('Adding new skill ' + newSkill);
+  console.log('Adding new skill ' + name);
   Skills.insert(newSkill);
   Meteor.users.find({}).forEach(function (user) {
     newSkill.userId = user._id;
@@ -28,3 +28,10 @@ Skills.setQuestion = function (skill, question, value) {
   updateFields[question] = value;
   Skills.update(skillToUpdate._id, {$set: updateFields});
 }
+
+Meteor.methods({
+  labelSkill: function(skill, labels) {
+    var coloredLabels = Labels.toColored(labels);
+    Skills.update({name: skill}, {$set: {labels: coloredLabels}}, {multi: true});
+  }
+});

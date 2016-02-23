@@ -1,27 +1,46 @@
-Template.page.onRendered(function () {
+function initializeDragula() {
   var labelListId = 'labelList';
 
   function isLabelList(el, interactee) {
-    return interactee.id === labelListId
+    return interactee.id === labelListId;
   }
 
   function isNotLabelList(el, interactee) {
     return !isLabelList(el, interactee);
   }
 
-  Meteor.defer(function () {
-    dragula($('#' + labelListId + ', td.skillLabels').toArray(), {
-      copy: isLabelList,
-      accepts: isNotLabelList,
-      removeOnSpill: isNotLabelList
-    });
+  dragula($('#' + labelListId + ', td.skillLabels').toArray(), {
+    copy: isLabelList,
+    accepts: isNotLabelList
+  }).on('drop', function (el, target) {
+    var skill  = target.dataset.skill,
+        labels = $(target).children().map(function (i, e) {
+      return $(e).text();
+    }).toArray();
+    Meteor.call('labelSkill', skill, labels);
   });
+}
+
+function addNew(id, collection) {
+  return function () {
+    var newValue = $('#' + id + ' input').val();
+    console.log(newValue);
+    if (newValue) collection.addNew(newValue);
+  }
+}
+
+Template.page.onRendered(function () {
+  Meteor.defer(initializeDragula);
 });
 
 Template.labels.helpers({
   labels: function () {
     return Labels.find({});
-  },
+  }
+});
+
+Template.labels.events({
+  'click #addLabel img': addNew('addLabel', Labels)
 });
 
 Template.skills.helpers({
@@ -31,9 +50,7 @@ Template.skills.helpers({
 });
 
 Template.skills.events({
-  'click #addSkill': function () {
-    Skills.addNew($('#newSkill').val());
-  },
+  'click #addSkill img': addNew('addSkill', Skills),
   'click [type="checkbox"]': function (event) {
     var question = event.target.dataset.question,
         skill    = event.target.dataset.skill,

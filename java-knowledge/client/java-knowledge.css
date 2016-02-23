@@ -10,6 +10,10 @@ table thead th {
   text-align: left;
 }
 
+td [type="checkbox"] {
+    margin-left: 48px;
+}
+
 .label {
   font-family: 'Helvetica Neue';
   color: black;
@@ -23,13 +27,28 @@ table thead th {
   cursor: -webkit-grab;
 }
 
-#login-buttons {
-  right: 200px;
-  position: absolute;
+.label.selected {
+  color: white;
+  border: solid 2px white;
+  margin: 0px;
 }
 
-#addSkill {
+.addBox img {
+  margin-left: 2px;
   margin-bottom: -5px;
   height: 18px;
   cursor: pointer;
+}
+
+#addLabel {
+  display: inline-block;
+}
+
+#addLabel input {
+  width: 100px;
+}
+
+#login-buttons {
+  right: 200px;
+  position: absolute;
 }

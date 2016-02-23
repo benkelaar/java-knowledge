@@ -16,17 +16,11 @@
 </template>
 
 <template name="labels">
-  Labels:
   <div id="labelList">
     {{> labelList labels}}
+    {{> addBox id="addLabel"}}
   </div>
   <br />
-</template>
-
-<template name="labelList">
-  {{#each this}}
-    <span class="label" style="background-color: {{colour}}">{{name}}</span>
-  {{/each}}
 </template>
 
 <template name="skills">
@@ -40,8 +34,7 @@
     </thead>
     <tfoot>
       <tr>
-        <td><input id="newSkill" type="textbox" /></td>
-        <td><img id="addSkill" src="/images/button_add.png" /></td>
+        <td>{{> addBox id="addSkill"}}</td>
       </tr>
       <tr>
         <td>Total score:</td>
@@ -60,4 +53,14 @@
       {{/each}}
     </tbody>
   </table>
+</template>
+
+<template name="labelList">
+  {{#each this}}
+    <span class="label" style="background-color: {{colour}}">{{name}}</span>
+  {{/each}}
+</template>
+
+<template name="addBox">
+  <div id={{id}} class="addBox"><input type="textbox" /><img src="/images/button_add.png" /></div>
 </template>
