@@ -7,14 +7,20 @@ body {
 
 table thead th {
   padding: 10px;
+  text-align: left;
 }
 
 .label {
   font-family: 'Helvetica Neue';
   color: black;
   padding: 3px;
+  margin: 2px;
   border-radius: 6px;
   box-shadow: 1px 1px 3px 0px white;
+  cursor: pointer; /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
 }
 
 #login-buttons {

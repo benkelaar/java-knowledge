@@ -5,18 +5,28 @@
   <header>
       {{> loginButtons}}
   </header>
+  {{> page}}
+</body>
+
+<template name="page">
   {{#if currentUser}}
     {{> labels}}
     {{> skills}}
   {{/if}}
-</body>
+</template>
 
 <template name="labels">
   Labels:
-  {{#each labels}}
+  <div id="labelList">
+    {{> labelList labels}}
+  </div>
+  <br />
+</template>
+
+<template name="labelList">
+  {{#each this}}
     <span class="label" style="background-color: {{colour}}">{{name}}</span>
   {{/each}}
-  <br />
 </template>
 
 <template name="skills">
@@ -42,9 +52,10 @@
       {{#each skills}}
         <tr>
           <td>{{name}}</td>
-          <td><input name="{{name}}" data-question="what" type="checkbox" checked="{{what}}" /></td>
-          <td><input name="{{name}}" data-question="how"  type="checkbox" checked="{{how}}"  /></td>
-          <td><input name="{{name}}" data-question="when" type="checkbox" checked="{{when}}" /></td>
+          <td><input data-skill="{{name}}" data-question="what" type="checkbox" checked="{{what}}" /></td>
+          <td><input data-skill="{{name}}" data-question="how"  type="checkbox" checked="{{how}}"  /></td>
+          <td><input data-skill="{{name}}" data-question="when" type="checkbox" checked="{{when}}" /></td>
+          <td data-skill="{{name}}" class="skillLabels">{{> labelList labels}}</td>
         </tr>
       {{/each}}
     </tbody>
