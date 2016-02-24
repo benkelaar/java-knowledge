@@ -1,4 +1,5 @@
 function initializeDragula() {
+  console.log('Initializing Dragula');
   var labelListId = 'labelList';
 
   function isLabelList(el, interactee) {
@@ -29,8 +30,8 @@ function addNew(id, collection) {
   }
 }
 
-Template.page.onRendered(function () {
-  Meteor.defer(initializeDragula);
+Template.body.onRendered(function () {
+  initializeDragula();
 });
 
 Template.labels.helpers({
