@@ -48,6 +48,10 @@ td [type="checkbox"] {
   width: 100px;
 }
 
+#dragula {
+  height: 16px;
+}
+
 #login-buttons {
   right: 200px;
   position: absolute;

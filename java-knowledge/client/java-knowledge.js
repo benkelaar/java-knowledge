@@ -31,7 +31,7 @@ function addNew(id, collection) {
 }
 
 Template.body.onRendered(function () {
-  initializeDragula();
+  Meteor.defer(initializeDragula);
 });
 
 Template.labels.helpers({
@@ -41,7 +41,8 @@ Template.labels.helpers({
 });
 
 Template.labels.events({
-  'click #addLabel img': addNew('addLabel', Labels)
+  'click #addLabel img': addNew('addLabel', Labels),
+  'click #dragula': initializeDragula
 });
 
 Template.skills.helpers({
