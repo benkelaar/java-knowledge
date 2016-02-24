@@ -41,13 +41,26 @@ Template.labels.helpers({
 });
 
 Template.labels.events({
+  'click .label': function (event) {
+    var label = $(event.target),
+        selected = UserSettings.toggleLabel(label.text());
+    label.toggleClass('selected', selected);
+  },
   'click #addLabel img': addNew('addLabel', Labels),
   'click #dragula': initializeDragula
 });
 
+Template.labels.onRendered(function () {
+  var selected = UserSettings.selectedLabels();
+  if (selected.length) {
+    this.$('span:contains("' + selected.join('"),span:contains("') + '")')
+        .addClass('selected');
+  }
+});
+
 Template.skills.helpers({
   skills: function () {
-    return Skills.find({userId: Meteor.userId()});
+    return Skills.findFiltered();
   },
   score: function () {
     return Skills.calculateScore(Meteor.userId());

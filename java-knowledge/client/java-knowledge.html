@@ -5,15 +5,11 @@
   <header>
       {{> loginButtons}}
   </header>
-  {{> page}}
-</body>
-
-<template name="page">
   {{#if currentUser}}
     {{> labels}}
     {{> skills}}
   {{/if}}
-</template>
+</body>
 
 <template name="labels">
   <div id="labelList">

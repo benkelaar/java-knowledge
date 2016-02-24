@@ -1,5 +1,14 @@
 Skills = new Mongo.Collection('skills');
 
+function createFilteredQuery() {
+  var selectedLabels = UserSettings.selectedLabels(),
+      query = {userId: Meteor.userId()};
+  if (selectedLabels.length) {
+    query.labels = { $elemMatch: { name: { $in: selectedLabels } } }
+  }
+  return query;
+}
+
 Skills.addNew = function (name) {
   var newSkill = {
     name: name,
@@ -20,6 +29,10 @@ Skills.addNew = function (name) {
     newSkill.userId = user._id;
     Skills.insert(newSkill);
   });
+};
+
+Skills.findFiltered = function () {
+  return Skills.find(createFilteredQuery());
 }
 
 Skills.setQuestion = function (skill, question, value) {
@@ -27,7 +40,7 @@ Skills.setQuestion = function (skill, question, value) {
       skillToUpdate = Skills.findOne({userId: Meteor.userId(), name: skill});
   updateFields[question] = value;
   Skills.update(skillToUpdate._id, {$set: updateFields});
-}
+};
 
 Meteor.methods({
   labelSkill: function(skill, labels) {
@@ -38,7 +51,7 @@ Meteor.methods({
 
 Skills.calculateScore = function (userId) {
   function count(column) {
-    var query = {userId: userId};
+    var query = createFilteredQuery();
     query[column] = true;
     return Skills.find(query).count();
   }
