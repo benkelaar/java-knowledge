@@ -35,3 +35,15 @@ Meteor.methods({
     Skills.update({name: skill}, {$set: {labels: coloredLabels}}, {multi: true});
   }
 });
+
+Skills.calculateScore = function (userId) {
+  function count(column) {
+    var query = {userId: userId};
+    query[column] = true;
+    return Skills.find(query).count();
+  }
+  var whatScore = count('what'),
+      howScore  = count('how')  * 2,
+      whenScore = count('when') * 3;
+  return whatScore + howScore + whenScore;
+};

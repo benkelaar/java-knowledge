@@ -25,7 +25,6 @@ function initializeDragula() {
 function addNew(id, collection) {
   return function () {
     var newValue = $('#' + id + ' input').val();
-    console.log(newValue);
     if (newValue) collection.addNew(newValue);
   }
 }
@@ -47,6 +46,9 @@ Template.labels.events({
 Template.skills.helpers({
   skills: function () {
     return Skills.find({userId: Meteor.userId()});
+  },
+  score: function () {
+    return Skills.calculateScore(Meteor.userId());
   }
 });
 
