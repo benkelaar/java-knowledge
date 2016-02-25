@@ -15,7 +15,7 @@ td [type="checkbox"] {
 }
 
 .label {
-  font-family: 'Helvetica Neue';
+  font-family: 'Helvetica Neue', helvetica, sans-serif;
   color: black;
   padding: 3px;
   margin: 2px;
