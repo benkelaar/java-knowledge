@@ -23,15 +23,37 @@ function initializeDragula() {
   });
 }
 
-function addNew(id, collection) {
+addNew = function (id, collection) {
   return function () {
     var newValue = $('#' + id + ' input').val();
     if (newValue) collection.addNew(newValue);
   }
-}
+};
 
 Template.body.onRendered(function () {
   Meteor.defer(initializeDragula);
+});
+
+Template.body.helpers({
+  showSkills: function() {
+    var settings = UserSettings.findOne({userId: Meteor.userId()});
+    return settings && settings.shown === 'skills';
+  },
+  showGroups: function() {
+    var settings = UserSettings.findOne({userId: Meteor.userId()});
+    return settings && settings.shown === 'groups';
+  }
+});
+
+Template.menu.helpers({
+  showIcon: function() {
+    var settings = UserSettings.findOne({userId: Meteor.userId()});
+    return settings && settings.shown === 'skills' ? 'group' : 'user';
+  }
+});
+
+Template.menu.events({
+  'click #toggle': UserSettings.toggleShown
 });
 
 Template.labels.helpers({
@@ -55,24 +77,5 @@ Template.labels.onRendered(function () {
   if (selected.length) {
     this.$('span:contains("' + selected.join('"),span:contains("') + '")')
         .addClass('selected');
-  }
-});
-
-Template.skills.helpers({
-  skills: function () {
-    return Skills.findFiltered();
-  },
-  score: function () {
-    return Skills.calculateScore(Meteor.userId());
-  }
-});
-
-Template.skills.events({
-  'click #addSkill img': addNew('addSkill', Skills),
-  'click [type="checkbox"]': function (event) {
-    var question = event.target.dataset.question,
-        skill    = event.target.dataset.skill,
-        value    = event.target.checked;
-    Skills.setQuestion(skill, question, value);
   }
 });

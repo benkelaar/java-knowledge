@@ -18,3 +18,12 @@ UserSettings.toggleLabel = function (label) {
   UserSettings.update({_id: settings._id}, update);
   return !selected;
 }
+
+UserSettings.toggleShown = function () {
+  var settings = UserSettings.findOne({userId: Meteor.userId()});
+      newValue = settings && settings.shown === 'skills' ? 'groups' : 'skills'
+  if (!settings) {
+    UserSettings.insert({userId: Meteor.userId(), selectedLabels: [label], shown: 'skills'});
+  }
+  UserSettings.update({_id: settings._id}, {$set: {shown: newValue}});
+}

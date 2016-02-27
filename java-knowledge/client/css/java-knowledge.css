@@ -40,6 +40,11 @@ td [type="checkbox"] {
   cursor: pointer;
 }
 
+#toggle {
+  height: 48px;
+  cursor: pointer;
+}
+
 #addLabel {
   display: inline-block;
 }

@@ -1,24 +1,3 @@
-<head>
-  <title>Java knowledge classifier</title>
-</head>
-<body>
-  <header>
-      {{> loginButtons}}
-  </header>
-  {{#if currentUser}}
-    {{> labels}}
-    {{> skills}}
-  {{/if}}
-</body>
-
-<template name="labels">
-  <div id="labelList">
-    {{> labelList labels}}
-    {{> addBox id="addLabel"}}
-    <img id="dragula" src="/images/dragula.png" />
-  </div>
-  <br />
-</template>
 
 <template name="skills">
   <table id="skills">
@@ -50,14 +29,4 @@
       {{/each}}
     </tbody>
   </table>
-</template>
-
-<template name="labelList">
-  {{#each this}}
-    <span class="label" style="background-color: {{colour}}">{{name}}</span>
-  {{/each}}
-</template>
-
-<template name="addBox">
-  <div id={{id}} class="addBox"><input type="textbox" /><img src="/images/button_add.png" /></div>
 </template>
