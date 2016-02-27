@@ -1,29 +1,44 @@
 UserSettings = new Mongo.Collection('userSettings');
 
 UserSettings.selectedLabels = function () {
-  var settings = UserSettings.findOne({userId: Meteor.userId()});
-  return settings && settings.selectedLabels ? settings.selectedLabels : [];
+  return findSetting('selectedLabels', []);
 };
 
 UserSettings.toggleLabel = function (label) {
-  var settings = UserSettings.findOne({userId: Meteor.userId()}),
-      selected = settings && _.contains(settings.selectedLabels, label),
-      modifier = selected ? '$pull' : '$addToSet',
-      update   = {};
+  toggleColumnValue('selectedLabels', label);
+}
+
+UserSettings.selectedShown = function () {
+  return findSetting('shown', []);
+};
+
+UserSettings.toggleShown = function (name) {
+  toggleColumnValue('shown', name);
+}
+
+function findSetting(name, defaultValue) {
+  var settings = UserSettings.findOne({userId: Meteor.userId()});
+  return settings && settings[name] ? settings[name] : defaultValue;
+}
+
+function toggleColumnValue(column, value) {
+  var settings    = UserSettings.findOne({userId: Meteor.userId()}),
+      selected    = settings && _.contains(settings[column], value),
+      modifier    = selected ? '$pull' : '$addToSet',
+      update      = {},
+      columnValue = {};
   if (!settings) {
-    UserSettings.insert({userId: Meteor.userId(), selectedLabels: [label]});
+    insertBaseSettings(column, value)
     return true;
   }
-  update[modifier] = {selectedLabels: label};
+  columnValue[column] = value;
+  update[modifier] = columnValue;
   UserSettings.update({_id: settings._id}, update);
   return !selected;
 }
 
-UserSettings.toggleShown = function () {
-  var settings = UserSettings.findOne({userId: Meteor.userId()});
-      newValue = settings && settings.shown === 'skills' ? 'groups' : 'skills'
-  if (!settings) {
-    UserSettings.insert({userId: Meteor.userId(), selectedLabels: [label], shown: 'skills'});
-  }
-  UserSettings.update({_id: settings._id}, {$set: {shown: newValue}});
+function insertBaseSettings(column, value) {
+  var settings = {userId: Meteor.userId(), selectedLabels: [], shown: []};
+  settings[column] = [value];
+  UserSettings.insert(settings);
 }

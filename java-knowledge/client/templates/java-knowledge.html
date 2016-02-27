@@ -7,7 +7,9 @@
   </header>
   {{#if currentUser}}
     {{> menu}}
-    {{> labels}}
+    {{#if showLabels}}
+      {{> labels}}
+    {{/if}}
   {{/if}}
 
   {{#if showGroups}}
@@ -21,7 +23,9 @@
 
 <template name="menu">
   <div id="menu">
-    <img id="toggle" src="/images/{{showIcon}}.png" />
+    <div id="labels" class="toggle"></div>
+    <div id="group" class="toggle"></div>
+    <div id="skills" class="toggle"></div>
   </div>
 </template>
 
@@ -41,5 +45,5 @@
 </template>
 
 <template name="addBox">
-  <div id={{id}} class="addBox"><input type="textbox" /><img src="/images/button_add.png" /></div>
+  <div id="{{id}}" class="addBox"><input type="textbox" /><img src="/images/button_add.png" /></div>
 </template>

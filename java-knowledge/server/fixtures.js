@@ -4,5 +4,3 @@ if (Labels.find({}).count() === 0) {
     colour: '#f1e05a'
   });
 }
-
-UserSettings.update({shown: {$exists: false}}, {$set: {shown: 'skills'}}, {multi: true});

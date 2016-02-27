@@ -1,0 +1,36 @@
+table thead th {
+  padding: 10px;
+  text-align: left;
+}
+
+td [type="checkbox"] {
+    margin-left: 48px;
+}
+
+.label {
+  font-family: 'Helvetica Neue', helvetica, sans-serif;
+  color: black;
+  padding: 3px;
+  margin: 2px;
+  border-radius: 6px;
+  box-shadow: 1px 1px 3px 0px white;
+  cursor: pointer; /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.label.selected {
+  color: white;
+  border: solid 2px white;
+  margin: 0px;
+}
+
+
+#addLabel {
+  display: inline-block;
+}
+
+#addLabel input {
+  width: 100px;
+}

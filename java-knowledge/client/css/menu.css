@@ -1,0 +1,33 @@
+.toggle {
+  display: inline-block;
+  height: 48px;
+  width: 48px;
+  cursor: pointer;
+  border-radius: 24px;
+  background-size: 54px;
+  background-position: -3px -3px;
+}
+
+.toggle.selected {
+  box-shadow: 0px 0px 3px 3px white;
+}
+
+#menu {
+  margin:  10px 80px;
+}
+
+#menu div {
+  margin:  0px 6px;
+}
+
+#menu #labels {
+  background-image: url('/images/label.png');
+}
+
+#menu #group {
+  background-image: url('/images/group.png');
+}
+
+#menu #skills {
+  background-image: url('/images/user.png');
+}
