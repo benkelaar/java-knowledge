@@ -11,10 +11,6 @@ body {
   cursor: pointer;
 }
 
-#dragula {
-  height: 16px;
-}
-
 #login-buttons {
   right: 200px;
   position: absolute;

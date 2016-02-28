@@ -1,15 +1,12 @@
 function isShown(name) {
-  return function() {
-    return _.contains(UserSettings.selectedShown(), name);
-  }
+  return () => _.contains(UserSettings.selectedShown(), name);
 }
 
 function preSelect(settingName, toSelector) {
   return function () {
     var selected = UserSettings[settingName]();
     if (selected.length) {
-      this.$(toSelector(selected))
-          .addClass('selected');
+      this.$(toSelector(selected)).addClass('selected');
     }
   };
 }
@@ -22,9 +19,7 @@ function toggle(settingName, valueFromElement) {
   }
 }
 
-Template.body.onRendered(function () {
-  Meteor.defer(initializeDragula);
-});
+Template.body.onRendered(() => Meteor.defer(initializeDragula));
 
 Template.body.helpers({
   showLabels: isShown('labels'),
@@ -33,29 +28,22 @@ Template.body.helpers({
 });
 
 Template.menu.events({
-  'click .toggle': toggle('toggleShown', function ($target) {
-    return $target[0].id;
-  })
+  'click .toggle': toggle('toggleShown', $target => $target[0].id)
 });
 
-Template.menu.onRendered(preSelect('selectedShown', function (selected) {
-  return '#' + selected.join(',#')
-}));
+Template.menu.onRendered(preSelect('selectedShown',
+  selected => '#' + selected.join(',#')
+));
 
 Template.labels.helpers({
-  labels: function () {
-    return Labels.find({});
-  }
+  labels: () => Labels.find({})
 });
 
 Template.labels.events({
-  'click .label': toggle('toggleLabel', function ($target) {
-    return $target.text();
-  }),
-  'click #addLabel img, keyup #addLabel input': addNew(Labels),
-  'click #dragula': initializeDragula
+  'click .label': toggle('toggleLabel', $target => $target.text()),
+  'click #addLabel img, keyup #addLabel input': addNew(Labels)
 });
 
-Template.labels.onRendered(preSelect('selectedLabels', function (selected) {
-  return 'span:contains("' + selected.join('"),span:contains("') + '")';
-}));
+Template.labels.onRendered(preSelect('selectedLabels',
+  selected => 'span:contains("' + selected.join('"),span:contains("') + '")'
+));

@@ -24,10 +24,10 @@ function toColored(labels) {
 };
 
 Meteor.methods({
-  labelSkill: function(data, labels, newLabel) {
-    Skills.update({name: data.skill}, {$set: {labels: toColored(labels)}}, {multi: true});
+  labelSkill({skill}, labels, newLabel) {
+    Skills.update({name: skill}, {$set: {labels: toColored(labels)}}, {multi: true});
   },
-  labelGroup: function(data, labels, newLabel) {
-    // UserSettings.update({userId: Meteor.userId()}, )
+  labelGroup({group, slot}, labels, newLabel) {
+    UserSettings.update({userId: Meteor.userId()}, )
   }
 });
