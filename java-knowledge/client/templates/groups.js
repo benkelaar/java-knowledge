@@ -12,13 +12,16 @@ Template.groups.events({
 });
 
 Template.group.helpers({
-  newSlot: []
-})
-
-Template.slot.helpers({
+  newSlot: function() {
+    return {};
+  },
+  newSlotNumber: function() {
+    return this.slots.length;
+  },
   groupScore: function(groupName) {
-    console.log(groupName);
-    console.log(this);
+    // console.log(groupName); // = groupName
+    // console.log(this); // = group labels -> Could also be queried if necessary.
+    return this.length ? 5 : null;
   }
 })
 

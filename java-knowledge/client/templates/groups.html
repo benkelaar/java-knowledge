@@ -1,7 +1,7 @@
 <template name="groups">
   <section id="groups">
     {{#if notInGroup}}
-      You're not a part of any group, <a id="createGroup">create one?</a>
+      You're not a part of any group, perhaps create one?
     {{/if}}
     {{#each userGroups}}
       {{> group this}}
@@ -14,17 +14,20 @@
   <div class="scores">
     <h2>{{name}}</h2>
     {{#each slots}}
-      {{> slot this}}
+      <div class="slot">
+        <div class="score">{{groupScore ../name}}</div>
+        <div class="groupLabels" data-slot="{{@index}}" data-group="{{../name}}" >
+          {{> labelList this}}
+        </div>
+      </div>
     {{/each}}
-    {{> slot newSlot}}
+    <div class="new slot">
+      <div class="score"></div>
+      <div class="groupLabels" data-slot="{{newSlotNumber}}" data-group="{{name}}" >
+      </div>
+    </div>
   </div>
 </template>
 
 <template name="slot">
-  <div class="slot">
-    <div class="score">{{groupScore ../name}}</div>
-    <div class="groupLabels">
-      {{> labelList this}}
-    </div>
-  </div>
 </template>

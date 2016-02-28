@@ -1,18 +1,23 @@
 .slot {
-  height: 80px;
+  min-height: 80px;
+  min-width: 60px;
+  max-width: 200px;
   margin: 5px;
-}
-
-.slot:last-of-type {
-  width: 60px;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .slot .score {
   font-size: 48px;
   height: 60px;
   border-radius: 5px;
+  text-align: center;
 }
 
-.slot .score:hover {
-  box-shadow: 0px 0px 10px 5px aliceblue inset;
+.slot.new .groupLabels {
+  height: 20px;
+}
+
+.slot.new:hover .score, .slot.targeted .score {
+  box-shadow: 0px 0px 20px 0px aliceblue inset;
 }

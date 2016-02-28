@@ -8,10 +8,11 @@ td [type="checkbox"] {
 }
 
 .label {
-  font-family: 'Helvetica Neue', helvetica, sans-serif;
-  color: black;
+  display: inline-block;
   padding: 3px;
   margin: 2px;
+  font-family: 'Helvetica Neue', helvetica, sans-serif;
+  color: black;
   border-radius: 6px;
   box-shadow: 1px 1px 3px 0px white;
   cursor: pointer; /* fallback if grab cursor is unsupported */

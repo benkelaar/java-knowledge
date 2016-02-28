@@ -3,7 +3,7 @@ Labels = new Mongo.Collection('labels');
 Labels.addNew = function (name) {
   var newLabel = {
     name: name,
-    colour: Please.make_color({format: 'hex'})
+    colour: Please.make_color({format: 'hex'})[0]
   };
 
   if (Labels.find({name: name}).count() > 0) {
@@ -15,10 +15,19 @@ Labels.addNew = function (name) {
   Labels.insert(newLabel);
 }
 
-Labels.toColored = function (labels) {
+function toColored(labels) {
   return _.map(_.uniq(labels), function (label) {
     var template = Labels.findOne({name: label});
     delete template._id;
     return template;
   });
 };
+
+Meteor.methods({
+  labelSkill: function(data, labels, newLabel) {
+    Skills.update({name: data.skill}, {$set: {labels: toColored(labels)}}, {multi: true});
+  },
+  labelGroup: function(data, labels, newLabel) {
+    // UserSettings.update({userId: Meteor.userId()}, )
+  }
+});

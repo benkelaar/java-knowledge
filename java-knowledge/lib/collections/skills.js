@@ -42,13 +42,6 @@ Skills.setQuestion = function (skill, question, value) {
   Skills.update(skillToUpdate._id, {$set: updateFields});
 };
 
-Meteor.methods({
-  labelSkill: function(skill, labels) {
-    var coloredLabels = Labels.toColored(labels);
-    Skills.update({name: skill}, {$set: {labels: coloredLabels}}, {multi: true});
-  }
-});
-
 Skills.calculateScore = function (userId) {
   function count(column) {
     var query = createFilteredQuery();

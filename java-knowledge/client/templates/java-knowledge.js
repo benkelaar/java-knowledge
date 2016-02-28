@@ -1,28 +1,3 @@
-function initializeDragula() {
-  console.log('Initializing Dragula');
-  var labelListId = 'labelList';
-
-  function isLabelList(el, interactee) {
-    return interactee.id === labelListId;
-  }
-
-  function isNotLabelList(el, interactee) {
-    return !isLabelList(el, interactee);
-  }
-
-  dragula($('#' + labelListId + ', td[data-skill]').toArray(), {
-    copy: isLabelList,
-    accepts: isNotLabelList
-  }).on('drop', function (el, target) {
-    if (!target) return;
-    var skill  = target.dataset.skill,
-        labels = $(target).children().map(function (i, e) {
-      return $(e).text();
-    }).toArray();
-    Meteor.call('labelSkill', skill, labels);
-  });
-}
-
 function isShown(name) {
   return function() {
     return _.contains(UserSettings.selectedShown(), name);
