@@ -1,0 +1,18 @@
+.slot {
+  height: 80px;
+  margin: 5px;
+}
+
+.slot:last-of-type {
+  width: 60px;
+}
+
+.slot .score {
+  font-size: 48px;
+  height: 60px;
+  border-radius: 5px;
+}
+
+.slot .score:hover {
+  box-shadow: 0px 0px 10px 5px aliceblue inset;
+}

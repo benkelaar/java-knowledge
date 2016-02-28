@@ -1,10 +1,3 @@
-addNew = function (id, collection) {
-  return function () {
-    var newValue = $('#' + id + ' input').val();
-    if (newValue) collection.addNew(newValue);
-  }
-};
-
 function initializeDragula() {
   console.log('Initializing Dragula');
   var labelListId = 'labelList';
@@ -84,7 +77,7 @@ Template.labels.events({
   'click .label': toggle('toggleLabel', function ($target) {
     return $target.text();
   }),
-  'click #addLabel img': addNew('addLabel', Labels),
+  'click #addLabel img, keyup #addLabel input': addNew(Labels),
   'click #dragula': initializeDragula
 });
 

@@ -16,6 +16,18 @@ UserSettings.toggleShown = function (name) {
   toggleColumnValue('shown', name);
 }
 
+UserSettings.addGroup = function (name) {
+  var settingId = UserSettings.findOne({userId: Meteor.userId()})._id
+  UserSettings.update({_id: settingId}, {$addToSet: {groups: {
+    name: name,
+    slots: []
+  }}});
+}
+
+UserSettings.userGroups = function () {
+  return findSetting('groups', []);
+}
+
 function findSetting(name, defaultValue) {
   var settings = UserSettings.findOne({userId: Meteor.userId()});
   return settings && settings[name] ? settings[name] : defaultValue;

@@ -1,4 +1,30 @@
-
 <template name="groups">
-  Groups information
+  <section id="groups">
+    {{#if notInGroup}}
+      You're not a part of any group, <a id="createGroup">create one?</a>
+    {{/if}}
+    {{#each userGroups}}
+      {{> group this}}
+    {{/each}}
+    {{> addBox id="addGroup"}}
+  </section>
+</template>
+
+<template name="group">
+  <div class="scores">
+    <h2>{{name}}</h2>
+    {{#each slots}}
+      {{> slot this}}
+    {{/each}}
+    {{> slot newSlot}}
+  </div>
+</template>
+
+<template name="slot">
+  <div class="slot">
+    <div class="score">{{groupScore ../name}}</div>
+    <div class="groupLabels">
+      {{> labelList this}}
+    </div>
+  </div>
 </template>

@@ -8,7 +8,7 @@ Template.skills.helpers({
 });
 
 Template.skills.events({
-  'click #addSkill img': addNew('addSkill', Skills),
+  'click #addSkill img, keyup #addSkill input': addNew(Skills),
   'click [type="checkbox"]': function (event) {
     var question = event.target.dataset.question,
         skill    = event.target.dataset.skill,
