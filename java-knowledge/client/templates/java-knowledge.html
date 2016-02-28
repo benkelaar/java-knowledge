@@ -22,20 +22,19 @@
 </body>
 
 <template name="menu">
-  <div id="menu">
+  <nav id="menu">
     <div id="labels" class="toggle"></div>
     <div id="group" class="toggle"></div>
     <div id="skills" class="toggle"></div>
-  </div>
+  </nav>
 </template>
 
 <template name="labels">
-  <div id="labelList">
+  <section id="labelList">
     {{> labelList labels}}
     {{> addBox id="addLabel"}}
     <img id="dragula" src="/images/dragula.png" />
-  </div>
-  <br />
+  </section>
 </template>
 
 <template name="labelList">

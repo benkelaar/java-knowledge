@@ -1,31 +1,33 @@
 <template name="skills">
-  <table id="skills">
-    <thead>
-      <th>I know</th>
-      <th>what it is</th>
-      <th>how to use it</th>
-      <th>when to use it</th>
-      <th>Labels</th>
-    </thead>
-    <tfoot>
-      <tr>
-        <td>{{> addBox id="addSkill"}}</td>
-      </tr>
-      <tr>
-        <td>Total score:</td>
-        <td colspan=4>{{score}}</td>
-      </tr>
-    </tfoot>
-    <tbody>
-      {{#each skills}}
+  <section id="skills">
+    <table>
+      <thead>
+        <th>I know</th>
+        <th>what it is</th>
+        <th>how to use it</th>
+        <th>when to use it</th>
+        <th>Labels</th>
+      </thead>
+      <tfoot>
         <tr>
-          <td>{{name}}</td>
-          <td><input data-skill="{{name}}" data-question="what" type="checkbox" checked="{{what}}" /></td>
-          <td><input data-skill="{{name}}" data-question="how"  type="checkbox" checked="{{how}}"  /></td>
-          <td><input data-skill="{{name}}" data-question="when" type="checkbox" checked="{{when}}" /></td>
-          <td data-skill="{{name}}">{{> labelList labels}}</td>
+          <td>{{> addBox id="addSkill"}}</td>
         </tr>
-      {{/each}}
-    </tbody>
-  </table>
+        <tr>
+          <td>Total score:</td>
+          <td colspan=4>{{score}}</td>
+        </tr>
+      </tfoot>
+      <tbody>
+        {{#each skills}}
+          <tr>
+            <td>{{name}}</td>
+            <td><input data-skill="{{name}}" data-question="what" type="checkbox" checked="{{what}}" /></td>
+            <td><input data-skill="{{name}}" data-question="how"  type="checkbox" checked="{{how}}"  /></td>
+            <td><input data-skill="{{name}}" data-question="when" type="checkbox" checked="{{when}}" /></td>
+            <td data-skill="{{name}}">{{> labelList labels}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </section>
 </template>
