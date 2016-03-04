@@ -8,9 +8,14 @@ initializeDragula = function () {
     copy: (el, source) => source.id === labelListId,
     accepts: (el, target) => target.id !== labelListId
   });
-  drake.on('drop', (e, t) => storeLabels('skill', 'labelSkill', e, t));
-  drake.on('drop', function (event, target) {
-    storeLabels('group', 'labelGroup', event, target);
+  drake.on('drop', (el, t, source) => {
+    storeLabels('skill', 'labelSkill', el, t);
+    let bonus = $(`[data-skill="${t.dataset.skill}"] [data-label="${el.dataset.label}"]`).get(0);
+    if (bonus) bonus.remove();
+    if ('skill' in source.dataset) Meteor.call('removeSkillLabel', source.dataset.skill, el.dataset.label);
+  })
+  drake.on('drop', (el, target) => {
+    storeLabels('group', 'labelGroup', el, target);
     $('.new.slot .groupLabels').empty();
   })
   drake.on('over', setParentClass(true));

@@ -46,6 +46,6 @@ Template.labels.events({
 
 Template.labels.onRendered(() => {
   preSelect('selectedLabels',
-      selected => 'span:contains("' + selected.join('"),span:contains("') + '")')();
+      selected => '#labelList span:contains("' + selected.join('"),#labelList span:contains("') + '")')();
   initializeDragula();
 });

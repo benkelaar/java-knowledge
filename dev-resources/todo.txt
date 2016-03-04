@@ -1,5 +1,4 @@
 MUST HAVE:
-[Bug] Double label on drop to label
 [Security] Remove meteor-insecure and make it work
 
 SHOULD HAVE:
