@@ -1,11 +1,10 @@
 MUST HAVE:
-[Group] Calculate group score
 [Group] Store new group slots
 [Skill] Enable lower levels automatically
 [Label] Switch labels to "or" mode
 [Bug] Double label on drop
 [Bug] Not droppable after interface change
-[Label] Easily remove labels
+> [Label] Easily remove labels
 
 SHOULD HAVE:
 [Animation] Show add boxes prettily on first click

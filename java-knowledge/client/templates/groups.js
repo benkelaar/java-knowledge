@@ -19,8 +19,6 @@ Template.group.helpers({
     return this.slots.length;
   },
   groupScore: function(groupName) {
-    // console.log(groupName); // = groupName
-    // console.log(this); // = group labels -> Could also be queried if necessary.
-    return this.length ? 5 : null;
+    return Skills.calculateGroupScore(groupName, this);
   }
 })

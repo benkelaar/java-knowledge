@@ -1,6 +1,17 @@
 Skills = new Mongo.Collection('skills');
 
-function createFilteredQuery() {
+function calculateScore(baseQuery) {
+  function count(column) {
+    baseQuery[column] = true;
+    return Skills.find(baseQuery).count();
+  }
+  var whatScore = count('what'),
+      howScore  = count('how')  * 2,
+      whenScore = count('when') * 3;
+  return whatScore + howScore + whenScore;
+}
+
+function createUserQuery() {
   var selectedLabels = UserSettings.selectedLabels(),
       query = {userId: Meteor.userId()};
   if (selectedLabels.length) {
@@ -19,11 +30,11 @@ Skills.addNew = function (name) {
   };
 
   if (Skills.find({name: name}).count() > 0) {
-    console.log('Ignoring new skill \'' + name + '\' because it already exists');
+    console.log(`Ignoring new skill ${name} because it already exists`);
     return;
   }
 
-  console.log('Adding new skill ' + name);
+  console.log(`Adding new skill ${name}`);
   Skills.insert(newSkill);
   Meteor.users.find({}).forEach(function (user) {
     newSkill.userId = user._id;
@@ -32,7 +43,7 @@ Skills.addNew = function (name) {
 };
 
 Skills.findFiltered = function () {
-  return Skills.find(createFilteredQuery());
+  return Skills.find(createUserQuery());
 }
 
 Skills.setQuestion = function (skill, question, value) {
@@ -42,14 +53,14 @@ Skills.setQuestion = function (skill, question, value) {
   Skills.update(skillToUpdate._id, {$set: updateFields});
 };
 
-Skills.calculateScore = function (userId) {
-  function count(column) {
-    var query = createFilteredQuery();
-    query[column] = true;
-    return Skills.find(query).count();
-  }
-  var whatScore = count('what'),
-      howScore  = count('how')  * 2,
-      whenScore = count('when') * 3;
-  return whatScore + howScore + whenScore;
+Skills.calculateScore = () => calculateScore(createUserQuery());
+
+Skills.calculateGroupScore = function (group, labels) {
+  var users = UserSettings.find({groups: {$elemMatch: {name: 'Babylon 5'}}},
+      {'userId': true}).map(function (v) {return v.userId}),
+      query = {
+        userId: { $in: users },
+        labels: { $elemMatch: { name: { $in: _.map(labels, v => v.name) } } }
+      };
+  return calculateScore(query);
 };
