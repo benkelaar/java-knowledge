@@ -21,3 +21,5 @@ Template.group.helpers({
     return Skills.calculateGroupScore(groupName, this);
   }
 })
+
+Template.groups.onRendered(initializeDragula);

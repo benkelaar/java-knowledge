@@ -44,6 +44,8 @@ Template.labels.events({
   'click #addLabel img, keyup #addLabel input': addNew(Labels)
 });
 
-Template.labels.onRendered(preSelect('selectedLabels',
-  selected => 'span:contains("' + selected.join('"),span:contains("') + '")'
-));
+Template.labels.onRendered(() => {
+  preSelect('selectedLabels',
+      selected => 'span:contains("' + selected.join('"),span:contains("') + '")')();
+  initializeDragula();
+});

@@ -1,11 +1,10 @@
 MUST HAVE:
-> [Bug] Not droppable after interface change
 [Skill] Enable lower levels automatically
-[Label] Switch labels to "or" mode
 [Bug] Double label on drop
 [Skill] Historic charts of skill knowledge
 
 SHOULD HAVE:
+[Label] Switch labels to "or" mode
 [Animation] Show add boxes prettily on first click
 [Skill] links
 [Skill] code snippets

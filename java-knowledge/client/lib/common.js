@@ -6,5 +6,6 @@ addNew = function (collection, settingName) {
         setting     = settingName ? settingName : 'addNew';
     if (newValue) collection[setting](newValue);
     textElement.val('');
+    initializeDragula();
   };
 };

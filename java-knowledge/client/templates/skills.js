@@ -21,3 +21,5 @@ Template.skills.events({
     Skills.setQuestion(skill, question, value);
   }
 });
+
+Template.skills.onRendered(initializeDragula);
