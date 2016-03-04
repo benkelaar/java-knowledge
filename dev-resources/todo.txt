@@ -1,11 +1,12 @@
 MUST HAVE:
-[Skill] Enable lower levels automatically
-[Bug] Double label on drop
-[Skill] Historic charts of skill knowledge
+[Bug] Double label on drop to label
+[Security] Remove meteor-insecure and make it work
 
 SHOULD HAVE:
+[Skill] Historic charts of skill knowledge
 [Label] Switch labels to "or" mode
 [Animation] Show add boxes prettily on first click
 [Skill] links
 [Skill] code snippets
+[Group] Show people in your group that do know
 [Style] Remove double storage of colours

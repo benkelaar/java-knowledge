@@ -19,6 +19,8 @@ Template.skills.events({
         skill    = event.target.dataset.skill,
         value    = event.target.checked;
     Skills.setQuestion(skill, question, value);
+    if (value && question == 'when') Skills.setQuestion(skill, 'how', value);
+    if (value && (question == 'when' || question == 'how')) Skills.setQuestion(skill, 'what', value);
   }
 });
 
