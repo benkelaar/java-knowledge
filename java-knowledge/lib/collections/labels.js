@@ -6,7 +6,7 @@ Labels.addNew = function (name) {
     colour: Please.make_color({format: 'hex'})[0]
   };
 
-  if (Labels.find({name: name}).count() > 0) {
+  if (Labels.find({name}).count() > 0) {
     console.log('Ignoring new label \'' + name + '\' because it already exists');
     return;
   }
@@ -28,6 +28,15 @@ Meteor.methods({
     Skills.update({name: skill}, {$set: {labels: toColored(labels)}}, {multi: true});
   },
   labelGroup({group, slot}, labels, newLabel) {
-    UserSettings.update({userId: Meteor.userId()}, )
+    let label   = toColored([newLabel])[0],
+        current = UserSettings.findOne({userId: Meteor.userId()});
+    current.groups.forEach(function(value, i) {
+      if (value.name === group) {
+        value.slots[slot].push(label);
+      }
+    });
+    UserSettings.update({userId: Meteor.userId()}, current);
   }
 });
+
+// db.userSettings.update({userId: "aNt5ZiJLARfNX2JDC", groups: {$elemMatch: {name: "Chelsea"}}}, {$addToSet: {'groups.$.slots': 'Java 8'}})

@@ -24,5 +24,3 @@ Template.group.helpers({
     return this.length ? 5 : null;
   }
 })
-
-// db.userSettings.update({userId: "aNt5ZiJLARfNX2JDC", groups: {$elemMatch: {name: "Chelsea"}}}, {$addToSet: {'groups.$.slots': 'Java 8'}})
