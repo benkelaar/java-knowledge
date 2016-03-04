@@ -8,8 +8,11 @@ initializeDragula = function () {
     copy: (el, source) => source.id === labelListId,
     accepts: (el, target) => target.id !== labelListId
   });
-  drake.on('drop', storeLabels('skill', 'labelSkill'));
-  drake.on('drop', storeLabels('group', 'labelGroup'));
+  drake.on('drop', (e, t) => storeLabels('skill', 'labelSkill', e, t));
+  drake.on('drop', function (event, target) {
+    storeLabels('group', 'labelGroup', event, target);
+    $('.new.slot .groupLabels').empty();
+  })
   drake.on('over', setParentClass(true));
   drake.on('out', setParentClass(false));
 
@@ -34,14 +37,10 @@ function findContainersChecked(containerSelector) {
   }
 }
 
-function storeLabels(dataId, meteorMethod) {
-  return function (el, target) {
-    if (!target || !(dataId in target.dataset)) return;
-    var labels = $(target).children().map(function (i, e) {
-          return $(e).text();
-        }).toArray();
-    Meteor.call(meteorMethod, target.dataset, labels, $(el).text());
-  };
+function storeLabels(dataId, meteorMethod, el, target) {
+  if (!target || !(dataId in target.dataset)) return;
+  var labels = $(target).children().map((i, e) => e.dataset.label).toArray();
+  Meteor.call(meteorMethod, target.dataset, labels, el.dataset.label);
 }
 
 function setParentClass(toggleOn) {

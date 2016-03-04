@@ -38,7 +38,7 @@
 
 <template name="labelList">
   {{#each this}}
-    <span class="label" style="background-color: {{colour}}">{{name}}</span>
+    <span class="label" data-label="{{name}}" style="background-color: {{colour}}">{{name}}<span class="remover"> &times;</span></span>
   {{/each}}
 </template>
 

@@ -14,7 +14,7 @@ function preSelect(settingName, toSelector) {
 function toggle(settingName, valueFromElement) {
   return function (event) {
     var $target = $(event.target),
-        selected = UserSettings[settingName](valueFromElement($target));
+        selected = UserSettings[settingName](valueFromElement(event.target));
     $target.toggleClass('selected', selected);
   }
 }
@@ -28,7 +28,7 @@ Template.body.helpers({
 });
 
 Template.menu.events({
-  'click .toggle': toggle('toggleShown', $target => $target[0].id)
+  'click .toggle': toggle('toggleShown', target => target.id)
 });
 
 Template.menu.onRendered(preSelect('selectedShown',
@@ -40,7 +40,7 @@ Template.labels.helpers({
 });
 
 Template.labels.events({
-  'click .label': toggle('toggleLabel', $target => $target.text()),
+  'click .label': toggle('toggleLabel', target => target.dataset.label),
   'click #addLabel img, keyup #addLabel input': addNew(Labels)
 });
 

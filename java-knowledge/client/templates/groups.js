@@ -1,24 +1,23 @@
 Template.groups.helpers({
-  userGroups: function () {
-    return UserSettings.userGroups();
-  },
-  notInGroup: function () {
-    return !UserSettings.userGroups().length
-  }
+  userGroups: () => UserSettings.userGroups(),
+  notInGroup: () => !UserSettings.userGroups().length
 });
 
 Template.groups.events({
-  'click #addGroup img, keyup #addGroup input': addNew(UserSettings, 'addGroup')
+  'click #addGroup img, keyup #addGroup input': addNew(UserSettings, 'addGroup'),
+  'click .remover': function (event) {
+    var $label = $(event.target).parent(),
+        data   = $label.parent()[0].dataset;
+    Meteor.call('removeGroupLabel', data, $label[0].dataset.label);
+  }
 });
 
 Template.group.helpers({
-  newSlot: function() {
-    return {};
-  },
-  newSlotNumber: function() {
+  newSlot: () => {},
+  newSlotNumber() {
     return this.slots.length;
   },
-  groupScore: function(groupName) {
+  groupScore(groupName) {
     return Skills.calculateGroupScore(groupName, this);
   }
 })

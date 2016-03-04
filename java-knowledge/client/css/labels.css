@@ -27,6 +27,19 @@ td [type="checkbox"] {
   margin: 0px;
 }
 
+.label .remover {
+  color: red;
+  cursor: pointer;
+}
+
+.label .remover:hover {
+  color: yellow;
+}
+
+#labelList .remover, .gu-mirror .remover {
+  display: none;
+}
+
 #addLabel {
   display: inline-block;
 }

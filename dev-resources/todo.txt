@@ -1,10 +1,12 @@
 MUST HAVE:
-[Group] Store new group slots
+> [Bug] Not droppable after interface change
 [Skill] Enable lower levels automatically
 [Label] Switch labels to "or" mode
 [Bug] Double label on drop
-[Bug] Not droppable after interface change
-> [Label] Easily remove labels
+[Skill] Historic charts of skill knowledge
 
 SHOULD HAVE:
 [Animation] Show add boxes prettily on first click
+[Skill] links
+[Skill] code snippets
+[Style] Remove double storage of colours
